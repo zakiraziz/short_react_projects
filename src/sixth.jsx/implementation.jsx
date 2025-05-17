@@ -40,3 +40,46 @@ const TodoList = () => {
   const removeTodo = (id) => {
     setTodos(todos.filter(todo => todo.id !== id));
   };
+ return (
+    <div className="todo">
+      <div className="todo-input">
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Add a new task"
+        />
+        <button onClick={addTodo}>Add</button>
+      </div>
+      <ul>
+        {todos.map(todo => (
+          <li key={todo.id}>
+            {todo.text}
+            <button onClick={() => removeTodo(todo.id)}>×</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+// Main App Component
+const App = () => {
+  return (
+    <div className="app">
+      <Header title="My React Project" />
+      <main>
+        <Counter />
+        <TodoList />
+      </main>
+    </div>
+  );
+};
+const styleElement = document.createElement('style');
+styleElement.innerHTML = styles;
+document.head.appendChild(styleElement);
+
+// Render the app
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<App />);
