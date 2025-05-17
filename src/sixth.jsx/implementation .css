@@ -42,3 +42,55 @@ button:hover {
   background: #f9f9f9;
   border-radius: 4px;
 }
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.todo {
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 4px;
+}
+
+.todo-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.todo-input input {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.todo ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo li {
+  padding: 10px;
+  background: white;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.todo li button {
+  background: #ff6b6b;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 50%;
+}
+
+.todo li button:hover {
+  background: #ff5252;
+}
