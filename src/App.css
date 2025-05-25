@@ -1,42 +1,61 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header Styles */
+.header {
+  background-color: #282c34;
+  padding: 1rem;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Home Page Styles */
+.home-page {
+  flex: 1;
   padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.features {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.feature-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  flex: 1;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #282c34;
+  color: white;
   text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  padding: 1rem;
 }
