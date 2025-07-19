@@ -89,3 +89,23 @@ Push (git push origin feature/your-feature).
 Open a Pull Request.
 
 (Optional: Add coding guidelines if needed.)
+# 📜 License
+This project is licensed under MIT License – see LICENSE for details.
+
+# 📬 Contact & Support
+Report Issues: GitHub Issues
+
+Email: your-email@example.com
+
+LinkedIn/Twitter: @your-handle
+
+(Optional: Add a "Buy Me a Coffee" or sponsorship link.)
+
+# 🎉 Thanks for Visiting!
+If you find this project useful, give it a ⭐ on GitHub!
+
+# Why This README Works?
+✔ Clear & Concise – No unnecessary sections, straight to the point.
+✔ Easy to Follow – Step-by-step installation and usage guide.
+✔ Encourages Engagement – Call-to-action for contributions and stars.
+✔ Visually Appealing – Emojis and formatting improve readability.
