@@ -53,14 +53,55 @@ http://localhost:3000
 text
 src/
 ├── assets/            # Static assets (images, fonts)
+
 ├── components/        # Reusable components
+
 │   ├── common/        # Shared UI components
+
 │   └── features/      # Feature-specific components
+
 ├── contexts/          # React contexts
+
 ├── hooks/             # Custom hooks
+
 ├── pages/             # Page components
+
 ├── services/          # API/services
+
 ├── styles/            # Global styles/theming
+
 ├── utils/             # Utility functions
+
 ├── App.js             # Main application component
+
 └── index.js           # Application entry point
+ # 🧪 Running Tests
+bash
+npm test
+# or
+yarn test
+# 🏗️ Building for Production
+bash
+npm run build
+# or
+yarn build
+# 🤝 Contributing
+Contributions are welcome! Please follow these steps:
+
+Fork the project
+
+Create your feature branch (git checkout -b feature/AmazingFeature)
+
+Commit your changes (git commit -m 'Add some amazing feature')
+
+Push to the branch (git push origin feature/AmazingFeature)
+
+Open a Pull Request
+
+# 📄 License
+Distributed under the MIT License. See LICENSE for more information.
+
+# 📧 Contact
+Your Name - @yourtwitter - your.email@example.com
+
+Project Link: https://github.com/your-username/your-repo-name
