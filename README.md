@@ -33,3 +33,34 @@ Check out the live version here: [Project Demo](https://your-demo-link.com)
    ```bash
    git clone https://github.com/your-username/your-repo-name.git
    cd your-repo-name
+Install dependencies
+
+bash
+npm install
+# or
+yarn install
+Start the development server
+
+bash
+npm start
+# or
+yarn start
+Open in browser
+
+text
+http://localhost:3000
+# 📂 Project Structure
+text
+src/
+├── assets/            # Static assets (images, fonts)
+├── components/        # Reusable components
+│   ├── common/        # Shared UI components
+│   └── features/      # Feature-specific components
+├── contexts/          # React contexts
+├── hooks/             # Custom hooks
+├── pages/             # Page components
+├── services/          # API/services
+├── styles/            # Global styles/theming
+├── utils/             # Utility functions
+├── App.js             # Main application component
+└── index.js           # Application entry point
