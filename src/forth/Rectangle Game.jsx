@@ -41,3 +41,31 @@ const Game = () => {
       gameStarted: true
     });
   };
+  return (
+    <div 
+      ref={containerRef} 
+      className={styles.container}
+      onClick={!state.gameStarted ? startGame : undefined}
+    >
+      <div className={styles.score}>Score: {state.score}</div>
+      
+      {state.gameStarted ? (
+        <>
+          <Player x={state.player.x} y={state.player.y} />
+          {state.enemies.map(enemy => (
+            <Enemy key={enemy.id} {...enemy} />
+          ))}
+        </>
+      ) : (
+        <div className={styles.gameOver}>
+          {state.gameOver ? 'Game Over!' : 'Click to Start'}
+          <div className={styles.finalScore}>
+            {state.gameOver && `Final Score: ${state.score}`}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Game;
