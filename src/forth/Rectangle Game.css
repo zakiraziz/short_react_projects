@@ -1,3 +1,4 @@
+/* Base container styles */
 .container {
   width: 100vw;
   height: 100vh;
@@ -7,6 +8,7 @@
   cursor: none;
 }
 
+/* Score display */
 .score {
   position: absolute;
   top: 20px;
@@ -15,8 +17,22 @@
   font-family: 'Arial', sans-serif;
   font-size: 24px;
   z-index: 10;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
+/* High score display */
+.highScore {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-size: 24px;
+  z-index: 10;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Game over screen */
 .gameOver {
   position: absolute;
   top: 50%;
@@ -27,9 +43,42 @@
   font-size: 48px;
   text-align: center;
   z-index: 10;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.gameOver.show {
+  opacity: 1;
 }
 
 .finalScore {
   font-size: 24px;
   margin-top: 20px;
+  color: #ffcc00;
 }
+
+/* Start screen */
+.startScreen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-size: 36px;
+  text-align: center;
+  z-index: 10;
+}
+
+.startButton {
+  margin-top: 30px;
+  padding: 12px 24px;
+  font-size: 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
