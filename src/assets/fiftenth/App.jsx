@@ -46,3 +46,48 @@ const TodoList = ({ todos, onToggleTodo, onDeleteTodo }) => {
     </div>
   );
 };
+
+// Add Todo Form Component
+const AddTodoForm = ({ onAddTodo }) => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (inputValue.trim()) {
+      onAddTodo(inputValue);
+      setInputValue('');
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="add-todo-form">
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        placeholder="Add a new todo..."
+        className="todo-input"
+      />
+      <button type="submit" className="add-btn">
+        Add Todo
+      </button>
+    </form>
+  );
+};
+
+// Main App Component
+const App = () => {
+  const [todos, setTodos] = useState([
+    { id: 1, text: 'Learn React', completed: false },
+    { id: 2, text: 'Build a project', completed: true },
+    { id: 3, text: 'Deploy to production', completed: false }
+  ]);
+
+  const addTodo = (text) => {
+    const newTodo = {
+      id: Date.now(),
+      text,
+      completed: false
+    };
+    setTodos([...todos, newTodo]);
+  };
