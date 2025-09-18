@@ -91,3 +91,37 @@ const App = () => {
     };
     setTodos([...todos, newTodo]);
   };
+ const toggleTodo = (id) => {
+    setTodos(todos.map(todo =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ));
+  };
+
+  const deleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
+
+  const completedCount = todos.filter(todo => todo.completed).length;
+
+  return (
+    <div className="app">
+      <Header title="React Todo App" />
+      
+      <main className="main-content">
+        <div className="stats">
+          <p>Total: {todos.length} | Completed: {completedCount} | Pending: {todos.length - completedCount}</p>
+        </div>
+        
+        <AddTodoForm onAddTodo={addTodo} />
+        
+        <TodoList
+          todos={todos}
+          onToggleTodo={toggleTodo}
+          onDeleteTodo={deleteTodo}
+        />
+      </main>
+    </div>
+  );
+};
+
+export default App;
