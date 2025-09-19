@@ -192,3 +192,79 @@ const App = () => {
     ];
   });
 
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Save todos to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
+  const addTodo = (text) => {
+    const newTodo = {
+      id: Date.now(),
+      text,
+      completed: false
+    };
+    setTodos([...todos, newTodo]);
+  };
+
+  const toggleTodo = (id) => {
+    setTodos(todos.map(todo =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ));
+  };
+
+  const deleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
+
+  const editTodo = (id, newText) => {
+    setTodos(todos.map(todo =>
+      todo.id === id ? { ...todo, text: newText } : todo
+    ));
+  };
+
+  const clearCompleted = () => {
+    setTodos(todos.filter(todo => !todo.completed));
+  };
+
+  const filteredTodos = todos.filter(todo =>
+    todo.text.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const completedCount = todos.filter(todo => todo.completed).length;
+  const activeCount = todos.length - completedCount;
+
+  return (
+    <div className="app">
+      <Header title="React Todo App" />
+      
+      <main className="main-content">
+        <div className="stats">
+          <p>Total: {todos.length} | Completed: {completedCount} | Pending: {activeCount}</p>
+        </div>
+        
+        <SearchBar onSearch={setSearchTerm} />
+        
+        <AddTodoForm onAddTodo={addTodo} />
+        
+        <div className="actions">
+          {completedCount > 0 && (
+            <button className="clear-btn" onClick={clearCompleted}>
+              Clear Completed ({completedCount})
+            </button>
+          )}
+        </div>
+        
+        <TodoList
+          todos={filteredTodos}
+          onToggleTodo={toggleTodo}
+          onDeleteTodo={deleteTodo}
+          onEditTodo={editTodo}
+        />
+      </main>
+    </div>
+  );
+};
+
+export default App;
