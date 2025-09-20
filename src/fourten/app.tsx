@@ -100,3 +100,73 @@ export default function App() {
             onChange={(e) => setNewTask(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && addTask()}
           />
+          
+          <div className="flex space-x-2">
+            <input
+              type="date"
+              className="px-3 py-2 border rounded flex-1"
+              value={dueDate}
+              onChange={(e) => setDueDate(e.target.value)}
+            />
+            <select
+              className="px-3 py-2 border rounded"
+              value={priority}
+              onChange={(e) => setPriority(e.target.value)}
+            >
+              <option value="high">High Priority</option>
+              <option value="medium">Medium Priority</option>
+              <option value="low">Low Priority</option>
+            </select>
+          </div>
+          
+          <button
+            onClick={addTask}
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+          >
+            Add Task
+          </button>
+        </div>
+
+        <div className="flex justify-between mb-4">
+          <div className="flex space-x-2">
+            <button 
+              onClick={() => setFilter("all")}
+              className={`px-3 py-1 rounded ${filter === "all" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+            >
+              All
+            </button>
+            <button 
+              onClick={() => setFilter("active")}
+              className={`px-3 py-1 rounded ${filter === "active" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+            >
+              Active
+            </button>
+            <button 
+              onClick={() => setFilter("completed")}
+              className={`px-3 py-1 rounded ${filter === "completed" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+            >
+              Completed
+            </button>
+          </div>
+          
+          <button
+            onClick={clearCompleted}
+            className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
+          >
+            Clear Completed
+          </button>
+        </div>
+
+        <div className="mb-2 text-sm text-gray-600">
+          {tasks.filter(t => !t.completed).length} tasks remaining
+        </div>
+
+        <ul className="space-y-2">
+          {filteredTasks.length === 0 ? (
+            <li className="text-center text-gray-500 py-4">No tasks found</li>
+          ) : (
+            filteredTasks.map((task, index) => {
+              // Find the original index to handle operations correctly
+              const originalIndex = tasks.findIndex(t => t === task);
+              
+      
