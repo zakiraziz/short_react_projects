@@ -169,4 +169,74 @@ export default function App() {
               // Find the original index to handle operations correctly
               const originalIndex = tasks.findIndex(t => t === task);
               
-      
+              return (
+                <li
+                  key={originalIndex}
+                  className={`flex justify-between items-center p-3 rounded shadow ${getPriorityClass(task.priority)} ${task.completed ? "bg-green-50 line-through text-gray-500" : "bg-white"}`}
+                >
+                  {editingIndex === originalIndex ? (
+                    <div className="flex flex-col w-full">
+                      <input
+                        type="text"
+                        className="px-2 py-1 border rounded mb-2"
+                        value={editText}
+                        onChange={(e) => setEditText(e.target.value)}
+                        autoFocus
+                      />
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={() => saveEdit(originalIndex)}
+                          className="px-2 py-1 bg-green-500 text-white rounded text-sm"
+                        >
+                          Save
+                        </button>
+                        <button
+                          onClick={cancelEdit}
+                          className="px-2 py-1 bg-gray-500 text-white rounded text-sm"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="flex flex-col flex-1">
+                        <span>{task.text}</span>
+                        {task.dueDate && (
+                          <span className="text-xs text-gray-500">
+                            Due: {new Date(task.dueDate).toLocaleDateString()}
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex space-x-2">
+                        <input
+                          type="checkbox"
+                          checked={task.completed}
+                          onChange={() => toggleComplete(originalIndex)}
+                          className="h-5 w-5"
+                        />
+                        <button
+                          onClick={() => startEditing(originalIndex)}
+                          className="text-blue-500 font-bold"
+                        >
+                          ✏️
+                        </button>
+                        <button
+                          onClick={() => removeTask(originalIndex)}
+                          className="text-red-500 font-bold"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </li>
+              );
+            })
+          )}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
