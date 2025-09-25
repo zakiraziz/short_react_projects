@@ -1,4 +1,4 @@
-// src/pages/Checkout.js - Checkout process with form validation
+ // src/pages/Checkout.js - Checkout process with form validation
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
