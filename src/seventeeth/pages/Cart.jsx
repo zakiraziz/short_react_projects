@@ -1,4 +1,4 @@
-// src/pages/Cart.js - Shopping cart page with order summary
+ // src/pages/Cart.js - Shopping cart page with order summary
 import React from 'react';
 import { Link } from 'react-router-dom';
 
