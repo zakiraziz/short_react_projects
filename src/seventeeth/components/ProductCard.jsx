@@ -92,7 +92,85 @@ const ProductCard = ({ product, addToCart, showQuickAdd = true }) => {
               <span className="current-price">{formatPrice(product.price)}</span>
             )}
           </div>
+         {/* Rating */}
+          {product.rating && (
+            <div className="product-rating">
+              <div className="stars">
+                {'⭐'.repeat(Math.floor(product.rating))}
+                {product.rating % 1 >= 0.5 && '⭐'}
+                <span className="rating-value">({product.rating})</span>
+              </div>
+              <span className="review-count">({product.reviewCount} reviews)</span>
+            </div>
+          )}
 
+          {/* Color Options */}
+          {product.colors && product.colors.length > 0 && (
+            <div className="color-options">
+              <span className="color-label">Colors:</span>
+              <div className="color-dots">
+                {product.colors.slice(0, 4).map((color, index) => (
+                  <span 
+                    key={index} 
+                    className="color-dot"
+                    style={{ 
+                      backgroundColor: color.toLowerCase(),
+                      border: color.toLowerCase() === 'white' ? '1px solid #ccc' : 'none'
+                    }}
+                    title={color}
+                  ></span>
+                ))}
+                {product.colors.length > 4 && (
+                  <span className="color-more">+{product.colors.length - 4}</span>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Size Options */}
+          {product.sizes && (
+            <div className="size-options">
+              <span className="size-label">Sizes: {product.sizes.join(', ')}</span>
+            </div>
+          )}
+
+          {/* Add to Cart Button */}
+          <button 
+            className={`add-to-cart-btn ${isAdding ? 'adding' : ''}`}
+            onClick={handleAddToCart}
+            disabled={isAdding}
+          >
+            {isAdding ? (
+              <>
+                <span className="loading-spinner"></span>
+                Adding...
+              </>
+            ) : (
+              <>
+                <span className="cart-icon">🛒</span>
+                Add to Cart
+              </>
+            )}
+          </button>
+
+          {/* Quick Actions */}
+          <div className="quick-actions">
+            <button className="wishlist-btn" title="Add to wishlist">
+              ♡
+            </button>
+            <button className="compare-btn" title="Add to compare">
+              ⇄
+            </button>
+            <button className="quick-view-btn" title="Quick view">
+              👁️
+            </button>
+          </div>
+        </div>
+      </Link>
+    </div>
+  );
+};
  
 
 export default ProductCard;
+
