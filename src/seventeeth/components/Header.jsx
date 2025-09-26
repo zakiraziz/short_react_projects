@@ -59,6 +59,41 @@ const Header = ({ cartCount }) => {
               )}
             </Link>
 
+            {/* User Account */}
+            <Link to="/account" className="user-icon">
+              👤
+            </Link>
 
+            {/* Mobile Menu Toggle */}
+            <button 
+              className={`menu-toggle ${isMenuOpen ? 'active' : ''}`}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        <nav className={`nav-mobile ${isMenuOpen ? 'open' : ''}`}>
+          {navigation.map(item => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`nav-link ${isActive(item.path) ? 'active' : ''}`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <span className="nav-icon">{item.icon}</span>
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+      </div>
+    </header>
+  );
+};
 
 export default Header;
+
