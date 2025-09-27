@@ -272,5 +272,122 @@ const ProductDetail = ({ addToCart }) => {
                 ))}
               </div>
             </div>
+            {/* Quantity */}
+            <div className="product-option">
+              <label className="option-label">Quantity</label>
+              <div className="quantity-selector">
+                <button 
+                  className="quantity-btn"
+                  onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
+                  disabled={quantity <= 1}
+                >
+                  −
+                </button>
+                <span className="quantity">{quantity}</span>
+                <button 
+                  className="quantity-btn"
+                  onClick={() => setQuantity(prev => prev + 1)}
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="product-actions">
+              <button 
+                className={`add-to-cart-btn ${isAddingToCart ? 'adding' : ''}`}
+                onClick={handleAddToCart}
+                disabled={isAddingToCart || !selectedSize}
+              >
+                {isAddingToCart ? (
+                  <>
+                    <span className="spinner"></span>
+                    Adding...
+                  </>
+                ) : (
+                  <>
+                    <span className="cart-icon">🛒</span>
+                    Add to Cart - {formatPrice(product.price * quantity)}
+                  </>
+                )}
+              </button>
+
+              <button 
+                className="buy-now-btn"
+                onClick={handleBuyNow}
+                disabled={!selectedSize}
+              >
+                Buy Now
+              </button>
+
+              <button className="wishlist-btn" title="Add to wishlist">
+                ♡ Save for Later
+              </button>
+            </div>
+
+            {/* Product Features */}
+            <div className="product-features">
+              <div className="feature">
+                <span className="feature-icon">🚚</span>
+                <span>Free shipping on orders over $75</span>
+              </div>
+              <div className="feature">
+                <span className="feature-icon">↩️</span>
+                <span>30-day return policy</span>
+              </div>
+              <div className="feature">
+                <span className="feature-icon">🔒</span>
+                <span>Secure checkout</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Product Tabs */}
+        <div className="product-tabs">
+          <div className="tab-headers">
+            <button 
+              className={`tab-header ${activeTab === 'description' ? 'active' : ''}`}
+              onClick={() => setActiveTab('description')}
+            >
+              Description
+            </button>
+            <button 
+              className={`tab-header ${activeTab === 'specifications' ? 'active' : ''}`}
+              onClick={() => setActiveTab('specifications')}
+            >
+              Specifications
+            </button>
+            <button 
+              className={`tab-header ${activeTab === 'reviews' ? 'active' : ''}`}
+              onClick={() => setActiveTab('reviews')}
+            >
+              Reviews ({product.reviewCount})
+            </button>
+            <button 
+              className={`tab-header ${activeTab === 'shipping' ? 'active' : ''}`}
+              onClick={() => setActiveTab('shipping')}
+            >
+              Shipping & Returns
+            </button>
+          </div>
+
+          <div className="tab-content">
+            {activeTab === 'description' && (
+              <div className="tab-panel">
+                <h3>Product Description</h3>
+                <p>{product.fullDescription}</p>
+                
+                <h4>Key Features</h4>
+                <ul className="features-list">
+                  {product.features.map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+
 
 
