@@ -387,6 +387,85 @@ const ProductDetail = ({ addToCart }) => {
                 </ul>
               </div>
             )}
+            {activeTab === 'specifications' && (
+              <div className="tab-panel">
+                <h3>Product Specifications</h3>
+                <table className="specifications-table">
+                  <tbody>
+                    {Object.entries(product.specifications).map(([key, value]) => (
+                      <tr key={key}>
+                        <td className="spec-label">{key}</td>
+                        <td className="spec-value">{value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {activeTab === 'reviews' && (
+              <div className="tab-panel">
+                <h3>Customer Reviews</h3>
+                <div className="reviews-summary">
+                  <div className="average-rating">
+                    <span className="rating-large">{product.rating}</span>
+                    <div className="stars-large">
+                      {'⭐'.repeat(5)}
+                    </div>
+                    <span>{product.reviewCount} reviews</span>
+                  </div>
+                </div>
+                <div className="reviews-list">
+                  <p>Review functionality coming soon...</p>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'shipping' && (
+              <div className="tab-panel">
+                <h3>Shipping & Returns</h3>
+                <div className="shipping-info">
+                  <h4>Shipping Information</h4>
+                  <ul>
+                    <li>Free standard shipping on orders over $75</li>
+                    <li>Express shipping available for $9.99</li>
+                    <li>Orders processed within 1-2 business days</li>
+                    <li>International shipping available</li>
+                  </ul>
+                  
+                  <h4>Return Policy</h4>
+                  <ul>
+                    <li>30-day return policy for unworn items</li>
+                    <li>Original packaging must be included</li>
+                    <li>Free returns for US customers</li>
+                    <li>Refund processed within 5 business days</li>
+                  </ul>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Related Products */}
+        <section className="related-products">
+          <h2>You Might Also Like</h2>
+          <div className="related-products-grid">
+            {relatedProducts.map(product => (
+              <ProductCard 
+                key={product.id} 
+                product={product} 
+                addToCart={addToCart}
+              />
+            ))}
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+};
+
+export default ProductDetail;
+
 
 
 
