@@ -125,6 +125,152 @@ const ProductDetail = ({ addToCart }) => {
       return;
     }
 
+    setIsAddingToCart(true);
+    try {
+      const cartItem = {
+        ...product,
+        selectedColor,
+        selectedSize,
+        quantity
+      };
+      await addToCart(cartItem);
+      
+      // Show success feedback
+      setTimeout(() => setIsAddingToCart(false), 1000);
+    } catch (error) {
+      setIsAddingToCart(false);
+      alert('Error adding to cart');
+    }
+  };
+
+  const handleBuyNow = () => {
+    handleAddToCart().then(() => {
+      navigate('/cart');
+    });
+  };
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(price);
+  };
+
+  const discountPercentage = product.originalPrice 
+    ? Math.round((1 - product.price / product.originalPrice) * 100)
+    : 0;
+
+  return (
+    <div className="product-detail-page">
+      <div className="container">
+        {/* Breadcrumb */}
+        <nav className="breadcrumb">
+          <Link to="/">Home</Link>
+          <span>/</span>
+          <Link to="/products">Products</Link>
+          <span>/</span>
+          <span className="current">{product.name}</span>
+        </nav>
+
+        {/* Product Main Section */}
+        <div className="product-main">
+          {/* Product Images */}
+          <div className="product-gallery">
+            <div className="main-image">
+              <div className="image-container">
+                <span className="product-emoji-large">{product.images[activeImage]}</span>
+                {product.onSale && (
+                  <div className="sale-badge-large">Sale</div>
+                )}
+                {product.isNew && (
+                  <div className="new-badge-large">New</div>
+                )}
+              </div>
+            </div>
+
+            <div className="image-thumbnails">
+              {product.images.map((image, index) => (
+                <button
+                  key={index}
+                  className={`thumbnail ${activeImage === index ? 'active' : ''}`}
+                  onClick={() => setActiveImage(index)}
+                >
+                  <span className="thumbnail-emoji">{image}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Product Info */}
+          <div className="product-info">
+            <div className="product-header">
+              <h1 className="product-title">{product.name}</h1>
+              <div className="product-meta">
+                <span className="product-brand">by {product.brand}</span>
+                <span className="product-sku">SKU: {product.sku}</span>
+              </div>
+
+              {/* Rating */}
+              <div className="product-rating">
+                <div className="stars">
+                  {'⭐'.repeat(Math.floor(product.rating))}
+                  <span className="rating-value">{product.rating}</span>
+                </div>
+                <span className="review-count">({product.reviewCount} reviews)</span>
+                <Link to="#reviews" className="see-reviews">See all reviews</Link>
+              </div>
+            </div>
+
+            {/* Pricing */}
+            <div className="product-pricing">
+              {product.originalPrice ? (
+                <div className="price-with-discount">
+                  <span className="current-price">{formatPrice(product.price)}</span>
+                  <span className="original-price">{formatPrice(product.originalPrice)}</span>
+                  <span className="discount-badge">-{discountPercentage}%</span>
+                </div>
+              ) : (
+                <span className="current-price">{formatPrice(product.price)}</span>
+              )}
+            </div>
+
+            {/* Color Selection */}
+            <div className="product-option">
+              <label className="option-label">Color: <strong>{selectedColor}</strong></label>
+              <div className="color-options">
+                {product.colors.map((color, index) => (
+                  <button
+                    key={index}
+                    className={`color-option ${selectedColor === color.name ? 'selected' : ''}`}
+                    onClick={() => setSelectedColor(color.name)}
+                    title={color.name}
+                  >
+                    <span 
+                      className="color-swatch"
+                      style={{ backgroundColor: color.value }}
+                    ></span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Size Selection */}
+            <div className="product-option">
+              <div className="option-header">
+                <label className="option-label">Size: <strong>{selectedSize || 'Select Size'}</strong></label>
+                <Link to="#size-guide" className="size-guide-link">Size Guide</Link>
+              </div>
+              <div className="size-options">
+                {product.sizes.map(size => (
+                  <button
+                    key={size}
+                    className={`size-option ${selectedSize === size ? 'selected' : ''}`}
+                    onClick={() => setSelectedSize(size)}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+            </div>
 
 
-export default ProductDetail;
