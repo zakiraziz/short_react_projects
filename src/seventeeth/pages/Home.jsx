@@ -182,6 +182,93 @@ const Home = ({ addToCart }) => {
         </div>
       </section>
 
+      {/* Featured Products Section */}
+      <section className="featured-products-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Featured Products</h2>
+            <p>Handpicked selections from our collection</p>
+            <Link to="/products" className="view-all-link">
+              View All Products →
+            </Link>
+          </div>
+          
+          <div className="products-grid">
+            {featuredProducts.map(product => (
+              <ProductCard 
+                key={product.id} 
+                product={product} 
+                addToCart={addToCart}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
 
+      {/* Banner Section */}
+      <section className="banner-section">
+        <div className="container">
+          <div className="banner-content">
+            <div className="banner-text">
+              <h2>Summer Sale</h2>
+              <p>Up to 50% off on selected items</p>
+              <Link to="/products?filter=sale" className="cta-button">
+                Shop Sale
+              </Link>
+            </div>
+            <div className="banner-visual">🔥</div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="features-section">
+        <div className="container">
+          <div className="features-grid">
+            <div className="feature-card">
+              <div className="feature-icon">🚚</div>
+              <h3>Free Shipping</h3>
+              <p>Free delivery on orders over $75</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">↩️</div>
+              <h3>Easy Returns</h3>
+              <p>30-day return policy</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">🔒</div>
+              <h3>Secure Payment</h3>
+              <p>Safe and encrypted transactions</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">⭐</div>
+              <h3>Premium Quality</h3>
+              <p>Curated selection of top brands</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="newsletter-section">
+        <div className="container">
+          <div className="newsletter-content">
+            <h2>Stay in the Loop</h2>
+            <p>Subscribe to get updates on new arrivals and special offers</p>
+            <div className="newsletter-form">
+              <input 
+                type="email" 
+                placeholder="Enter your email address" 
+                className="newsletter-input"
+              />
+              <button className="newsletter-button">Subscribe</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
 
 export default Home;
+
