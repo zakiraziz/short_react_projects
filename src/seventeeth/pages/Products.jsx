@@ -196,6 +196,110 @@ const Products = ({ addToCart }) => {
       results = results.filter(product => product.brand === filters.brand);
     }
 
+    if (filters.priceRange !== 'all') {
+      const range = priceRanges.find(r => r.id === filters.priceRange);
+      results = results.filter(product => product.price >= range.min && product.price <= range.max);
+    }
+
+    if (filters.searchQuery) {
+      const query = filters.searchQuery.toLowerCase();
+      results = results.filter(product =>
+        product.name.toLowerCase().includes(query) ||
+        product.brand.toLowerCase().includes(query) ||
+        product.description.toLowerCase().includes(query)
+      );
+    }
+
+    if (filters.inStock) {
+      results = results.filter(product => product.sizes && product.sizes.length > 0);
+    }
+
+    // Apply sorting
+    switch (filters.sortBy) {
+      case 'price-low':
+        results.sort((a, b) => a.price - b.price);
+        break;
+      case 'price-high':
+        results.sort((a, b) => b.price - a.price);
+        break;
+      case 'name':
+        results.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'rating':
+        results.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+        break;
+      case 'newest':
+        results.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
+        break;
+      default: // featured
+        results.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+    }
+
+    setFilteredProducts(results);
+    setCurrentPage(1); // Reset to first page when filters change
+  }, [filters]);
+
+  // Pagination
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const paginatedProducts = filteredProducts.slice(startIndex, startIndex + productsPerPage);
+
+  const handleFilterChange = (filterType, value) => {
+    setFilters(prev => ({
+      ...prev,
+      [filterType]: value
+    }));
+  };
+
+  const clearFilters = () => {
+    setFilters({
+      category: 'all',
+      brand: 'all',
+      priceRange: 'all',
+      sortBy: 'featured',
+      searchQuery: '',
+      inStock: true
+    });
+  };
+
+  return (
+    <div className="products-page">
+      <div className="container">
+        {/* Page Header */}
+        <div className="page-header">
+          <h1>All Products</h1>
+          <p>Discover our complete collection of premium footwear</p>
+          <div className="results-count">
+            Showing {filteredProducts.length} of {productsData.length} products
+          </div>
+        </div>
+
+        {/* Products Layout */}
+        <div className="products-layout">
+          {/* Sidebar Filters */}
+          <aside className="filters-sidebar">
+            <div className="filters-header">
+              <h3>Filters</h3>
+              <button onClick={clearFilters} className="clear-filters">
+                Clear All
+              </button>
+            </div>
+
+            {/* Search Filter */}
+            <div className="filter-group">
+              <label htmlFor="search">Search Products</label>
+              <input
+                id="search"
+                type="text"
+                placeholder="Search by name, brand..."
+                value={filters.searchQuery}
+                onChange={(e) => handleFilterChange('searchQuery', e.target.value)}
+                className="search-filter"
+              />
+            </div>
+
+
 
 export default Products;
+
 
