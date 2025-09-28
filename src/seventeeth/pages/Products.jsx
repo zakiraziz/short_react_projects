@@ -407,9 +407,102 @@ const Products = ({ addToCart }) => {
                   </button>
                 </div>
 
+                <div className="products-per-page">
+                  <label>Show:</label>
+                  <select 
+                    value={productsPerPage}
+                    onChange={(e) => setProductsPerPage(Number(e.target.value))}
+                  >
+                    <option value={12}>12</option>
+                    <option value={24}>24</option>
+                    <option value={36}>36</option>
+                    <option value={48}>48</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="toolbar-right">
+                <div className="sort-by">
+                  <label>Sort by:</label>
+                  <select 
+                    value={filters.sortBy}
+                    onChange={(e) => handleFilterChange('sortBy', e.target.value)}
+                  >
+                    <option value="featured">Featured</option>
+                    <option value="newest">Newest</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="name">Name: A to Z</option>
+                    <option value="rating">Highest Rated</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            {/* Products Grid/List */}
+            <div className={`products-container ${viewMode}`}>
+              {paginatedProducts.length > 0 ? (
+                paginatedProducts.map(product => (
+                  <ProductCard 
+                    key={product.id} 
+                    product={product} 
+                    addToCart={addToCart}
+                  />
+                ))
+              ) : (
+                <div className="no-products">
+                  <div className="no-products-icon">👟</div>
+                  <h3>No products found</h3>
+                  <p>Try adjusting your filters or search terms</p>
+                  <button onClick={clearFilters} className="cta-button">
+                    Clear Filters
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="pagination">
+                <button 
+                  className="pagination-btn"
+                  disabled={currentPage === 1}
+                  onClick={() => setCurrentPage(prev => prev - 1)}
+                >
+                  ← Previous
+                </button>
+
+                <div className="pagination-numbers">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                    <button
+                      key={page}
+                      className={`pagination-number ${currentPage === page ? 'active' : ''}`}
+                      onClick={() => setCurrentPage(page)}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                </div>
+
+                <button 
+                  className="pagination-btn"
+                  disabled={currentPage === totalPages}
+                  onClick={() => setCurrentPage(prev => prev + 1)}
+                >
+                  Next →
+                </button>
+              </div>
+            )}
+          </main>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 
 export default Products;
+
 
 
 
