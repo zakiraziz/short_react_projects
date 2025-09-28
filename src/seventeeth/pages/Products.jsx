@@ -87,6 +87,115 @@ const productsData = [
     isNew: true,
     featured: false
   },
+  {
+    id: 6,
+    name: "Air Force 1",
+    brand: "Nike",
+    price: 99.99,
+    category: "lifestyle",
+    emoji: "👟",
+    description: "The classic that never goes out of style",
+    rating: 4.9,
+    reviewCount: 512,
+    colors: ["White", "Black", "Red"],
+    sizes: [6, 7, 8, 9, 10, 11, 12, 13],
+    onSale: false,
+    isNew: false,
+    featured: true
+  },
+  {
+    id: 7,
+    name: "Cloudflow",
+    brand: "On",
+    price: 139.99,
+    originalPrice: 159.99,
+    category: "running",
+    emoji: "🏃",
+    description: "Lightweight speed for competitive runners",
+    rating: 4.4,
+    reviewCount: 93,
+    colors: ["White", "Black", "Blue"],
+    sizes: [7, 8, 9, 10, 11],
+    onSale: true,
+    isNew: false,
+    featured: false
+  },
+  {
+    id: 8,
+    name: "Old Skool",
+    brand: "Vans",
+    price: 69.99,
+    category: "skateboarding",
+    emoji: "🛹",
+    description: "Iconic skate shoe with timeless appeal",
+    rating: 4.5,
+    reviewCount: 287,
+    colors: ["Black", "White", "Checkerboard"],
+    sizes: [6, 7, 8, 9, 10, 11, 12],
+    onSale: false,
+    isNew: false,
+    featured: true
+  }
+];
+
+const categories = [
+  { id: 'all', name: 'All Products', count: productsData.length },
+  { id: 'lifestyle', name: 'Lifestyle', count: productsData.filter(p => p.category === 'lifestyle').length },
+  { id: 'running', name: 'Running', count: productsData.filter(p => p.category === 'running').length },
+  { id: 'skateboarding', name: 'Skateboarding', count: productsData.filter(p => p.category === 'skateboarding').length }
+];
+
+const brands = [...new Set(productsData.map(p => p.brand))];
+const priceRanges = [
+  { id: 'all', label: 'All Prices', min: 0, max: Infinity },
+  { id: 'under50', label: 'Under $50', min: 0, max: 50 },
+  { id: '50-100', label: '$50 - $100', min: 50, max: 100 },
+  { id: '100-150', label: '$100 - $150', min: 100, max: 150 },
+  { id: 'over150', label: 'Over $150', min: 150, max: Infinity }
+];
+
+const Products = ({ addToCart }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [filteredProducts, setFilteredProducts] = useState(productsData);
+  const [filters, setFilters] = useState({
+    category: searchParams.get('category') || 'all',
+    brand: searchParams.get('brand') || 'all',
+    priceRange: searchParams.get('priceRange') || 'all',
+    sortBy: searchParams.get('sort') || 'featured',
+    searchQuery: searchParams.get('search') || '',
+    inStock: searchParams.get('inStock') !== 'false'
+  });
+
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+  const [productsPerPage, setProductsPerPage] = useState(12);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Update URL when filters change
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (filters.category !== 'all') params.set('category', filters.category);
+    if (filters.brand !== 'all') params.set('brand', filters.brand);
+    if (filters.priceRange !== 'all') params.set('priceRange', filters.priceRange);
+    if (filters.sortBy !== 'featured') params.set('sort', filters.sortBy);
+    if (filters.searchQuery) params.set('search', filters.searchQuery);
+    if (!filters.inStock) params.set('inStock', 'false');
+    
+    setSearchParams(params);
+  }, [filters, setSearchParams]);
+
+  // Filter and sort products
+  useEffect(() => {
+    let results = [...productsData];
+
+    // Apply filters
+    if (filters.category !== 'all') {
+      results = results.filter(product => product.category === filters.category);
+    }
+
+    if (filters.brand !== 'all') {
+      results = results.filter(product => product.brand === filters.brand);
+    }
 
 
 export default Products;
+
