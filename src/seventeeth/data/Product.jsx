@@ -297,9 +297,119 @@ const Products = ({ addToCart }) => {
                 className="search-filter"
               />
             </div>
+          {/* Category Filter */}
+            <div className="filter-group">
+              <h4>Category</h4>
+              <div className="filter-options">
+                {categories.map(category => (
+                  <label key={category.id} className="filter-option">
+                    <input
+                      type="radio"
+                      name="category"
+                      value={category.id}
+                      checked={filters.category === category.id}
+                      onChange={(e) => handleFilterChange('category', e.target.value)}
+                    />
+                    <span className="checkmark"></span>
+                    <span className="option-label">
+                      {category.name} 
+                      <span className="option-count">({category.count})</span>
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Brand Filter */}
+            <div className="filter-group">
+              <h4>Brand</h4>
+              <div className="filter-options">
+                <label className="filter-option">
+                  <input
+                    type="radio"
+                    name="brand"
+                    value="all"
+                    checked={filters.brand === 'all'}
+                    onChange={(e) => handleFilterChange('brand', e.target.value)}
+                  />
+                  <span className="checkmark"></span>
+                  <span className="option-label">All Brands</span>
+                </label>
+                {brands.map(brand => (
+                  <label key={brand} className="filter-option">
+                    <input
+                      type="radio"
+                      name="brand"
+                      value={brand}
+                      checked={filters.brand === brand}
+                      onChange={(e) => handleFilterChange('brand', e.target.value)}
+                    />
+                    <span className="checkmark"></span>
+                    <span className="option-label">{brand}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Price Filter */}
+            <div className="filter-group">
+              <h4>Price Range</h4>
+              <div className="filter-options">
+                {priceRanges.map(range => (
+                  <label key={range.id} className="filter-option">
+                    <input
+                      type="radio"
+                      name="priceRange"
+                      value={range.id}
+                      checked={filters.priceRange === range.id}
+                      onChange={(e) => handleFilterChange('priceRange', e.target.value)}
+                    />
+                    <span className="checkmark"></span>
+                    <span className="option-label">{range.label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Availability Filter */}
+            <div className="filter-group">
+              <label className="filter-option checkbox">
+                <input
+                  type="checkbox"
+                  checked={filters.inStock}
+                  onChange={(e) => handleFilterChange('inStock', e.target.checked)}
+                />
+                <span className="checkmark"></span>
+                <span className="option-label">In Stock Only</span>
+              </label>
+            </div>
+          </aside>
+
+          {/* Main Content */}
+          <main className="products-main">
+            {/* Products Toolbar */}
+            <div className="products-toolbar">
+              <div className="toolbar-left">
+                <div className="view-mode">
+                  <button 
+                    className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`}
+                    onClick={() => setViewMode('grid')}
+                    title="Grid View"
+                  >
+                    ▢
+                  </button>
+                  <button 
+                    className={`view-btn ${viewMode === 'list' ? 'active' : ''}`}
+                    onClick={() => setViewMode('list')}
+                    title="List View"
+                  >
+                    ≡
+                  </button>
+                </div>
 
   
 
 export default Products;
+
 
 
