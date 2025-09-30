@@ -220,6 +220,65 @@ const Contact = () => {
                 </select>
               </div>
               
+              <div className="form-group">
+                <label htmlFor="message">Message *</label>
+                <textarea 
+                  id="message"
+                  name="message"
+                  required 
+                  rows="6"
+                  value={formData.message}
+                  onChange={handleChange}
+                  className={errors.message ? 'error' : ''}
+                  disabled={isSubmitting}
+                  placeholder="Tell us how we can help you..."
+                ></textarea>
+                {errors.message && <span className="error-message">{errors.message}</span>}
+                <div className="character-count">
+                  {formData.message.length} characters
+                </div>
+              </div>
+              
+              <button 
+                type="submit" 
+                className={`submit-button ${isSubmitting ? 'submitting' : ''}`}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <span className="spinner"></span>
+                    Sending...
+                  </>
+                ) : (
+                  'Send Message'
+                )}
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div className="faq-section">
+          <h2>Frequently Asked Questions</h2>
+          <div className="faq-grid">
+            <div className="faq-item">
+              <h3>What's your return policy?</h3>
+              <p>We offer 30-day returns on all unworn shoes in original packaging.</p>
+            </div>
+            <div className="faq-item">
+              <h3>Do you ship internationally?</h3>
+              <p>Yes, we ship to over 50 countries worldwide.</p>
+            </div>
+            <div className="faq-item">
+              <h3>How can I track my order?</h3>
+              <p>You'll receive a tracking number via email once your order ships.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Contact;
+
 
