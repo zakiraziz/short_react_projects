@@ -154,5 +154,72 @@ const Contact = () => {
               </div>
             </div>
           </div>
-  
+        
+          <div className="contact-form-section">
+            <h2>Send us a Message</h2>
+            
+            {submitStatus === 'success' && (
+              <div className="alert alert-success">
+                ✅ Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.
+              </div>
+            )}
+            
+            {submitStatus === 'error' && (
+              <div className="alert alert-error">
+                ❌ Sorry, there was an error sending your message. Please try again or contact us directly.
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="contact-form">
+              <div className="form-group">
+                <label htmlFor="name">Full Name *</label>
+                <input 
+                  id="name"
+                  name="name"
+                  type="text" 
+                  required 
+                  value={formData.name}
+                  onChange={handleChange}
+                  className={errors.name ? 'error' : ''}
+                  disabled={isSubmitting}
+                />
+                {errors.name && <span className="error-message">{errors.name}</span>}
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="email">Email Address *</label>
+                <input 
+                  id="email"
+                  name="email"
+                  type="email" 
+                  required 
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={errors.email ? 'error' : ''}
+                  disabled={isSubmitting}
+                />
+                {errors.email && <span className="error-message">{errors.email}</span>}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="subject">Subject</label>
+                <select 
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  disabled={isSubmitting}
+                >
+                  <option value="">Select a subject</option>
+                  <option value="general">General Inquiry</option>
+                  <option value="product">Product Question</option>
+                  <option value="order">Order Support</option>
+                  <option value="return">Returns & Exchanges</option>
+                  <option value="wholesale">Wholesale Inquiry</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              
+
 export default Contact;
+
