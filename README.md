@@ -35,3 +35,36 @@ Icons: [Lucide Icons / Font Awesome / Heroicons] (Choose one)
 Build Tool: [Vite / Create-React-App / Parcel] (Choose one)
 
 Deployment: [Vercel / Netlify / GitHub Pages]
+# 📦 Installation
+To run this project locally, follow these steps:
+
+Clone the repository:
+
+bash
+git clone https://github.com/your-username/seven-then.git
+Navigate to the project directory:
+
+bash
+cd seven-then
+Install dependencies:
+
+bash
+npm install
+# or
+# yarn install
+Start the development server:
+
+bash
+npm run dev
+# or
+# yarn dev
+Open your browser and go to http://localhost:3000 (or the port specified in your terminal).
+
+## 🎯 How to Use
+Open the Seven Then app.
+
+Click the "Start" button to begin a 7-minute focus session.
+
+Focus on your task until the timer completes and the alert sounds.
+
+Take a short break, then start your next session!
