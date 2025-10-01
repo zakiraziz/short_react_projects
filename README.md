@@ -68,3 +68,28 @@ Click the "Start" button to begin a 7-minute focus session.
 Focus on your task until the timer completes and the alert sounds.
 
 Take a short break, then start your next session!
+# 🤝 Contributing
+Contributions, issues, and feature requests are welcome! Feel free to check the issues page if you want to contribute.
+
+Fork the Project
+
+Create your Feature Branch (git checkout -b feature/AmazingFeature)
+
+Commit your Changes (git commit -m 'Add some AmazingFeature')
+
+Push to the Branch (git push origin feature/AmazingFeature)
+
+Open a Pull Request
+
+# 📄 License
+This project is licensed under the MIT License - see the LICENSE.md file for details.
+
+# 👤 Author
+Your Name
+
+Portfolio: your-portfolio-website.com
+
+GitHub: @your-username
+
+LinkedIn: Your LinkedIn
+
