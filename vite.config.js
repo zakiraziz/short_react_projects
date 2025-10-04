@@ -92,3 +92,49 @@ export default defineConfig(({ mode }) => {
     },
 
 })
+
+    // CSS configuration
+    css: {
+      modules: {
+        localsConvention: 'camelCase',
+      },
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@import "@/styles/variables.scss";`,
+        },
+        less: {
+          modifyVars: {
+            // Less variables if using Ant Design or similar
+          },
+        },
+      },
+    },
+
+    // Environment variables
+    define: {
+      __APP_ENV__: JSON.stringify(env.APP_ENV || mode),
+    },
+
+    // Optimize dependencies
+    optimizeDeps: {
+      include: [
+        'react',
+        'react-dom',
+        // Add other dependencies that don't change often
+      ],
+      exclude: [
+        // Add dependencies to exclude from pre-bundling
+      ],
+    },
+
+    // Experimental features
+    experimental: {
+      // Enable if using React 19+
+      // renderBuiltUrl(filename: string, { hostId, hostType, type }: { hostId: string, hostType: 'js' | 'css' | 'html', type: 'public' | 'asset' }) {
+      //   if (type === 'public') {
+      //     return { runtime: `window.assetsPath + "${filename}"` }
+      //   }
+      //   return { relative: true }
+      // }
+    },
+  }
