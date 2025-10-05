@@ -165,4 +165,77 @@ export default function App() {
                       className="px-2 py-1 bg-green-500 text-white rounded text-sm hover:bg-green-600"
                     >
                       ✓
-                   
+                    </button>
+                    <button
+                      onClick={cancelEdit}
+                      className="px-2 py-1 bg-gray-500 text-white rounded text-sm hover:bg-gray-600"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <span 
+                      className={`flex-1 ${task.completed ? "line-through" : ""} cursor-pointer`}
+                      onDoubleClick={() => startEditing(task)}
+                    >
+                      {task.text}
+                    </span>
+                    <div className="flex space-x-2">
+                      <button
+                        onClick={() => startEditing(task)}
+                        className="text-blue-500 hover:text-blue-700 text-sm"
+                        title="Edit task"
+                      >
+                        ✏️
+                      </button>
+                      <button
+                        onClick={() => removeTask(task.id)}
+                        className="text-red-500 hover:text-red-700 text-sm"
+                        title="Delete task"
+                      >
+                        🗑️
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            </li>
+          ))}
+          
+          {getFilteredTasks().length === 0 && (
+            <li className="text-center text-gray-500 py-4">
+              {filter === "completed" 
+                ? "No completed tasks" 
+                : filter === "active" 
+                ? "No active tasks" 
+                : "No tasks yet. Add one above!"}
+            </li>
+          )}
+        </ul>
+
+        {/* Clear Completed Button */}
+        {completedCount > 0 && (
+          <div className="flex justify-center">
+            <button
+              onClick={clearCompleted}
+              className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition duration-200"
+            >
+              Clear Completed ({completedCount})
+            </button>
+          </div>
+        )}
+
+        {/* Stats */}
+        <div className="text-center text-sm text-gray-600 mt-4">
+          {tasks.length > 0 && (
+            <p>
+              {activeCount} task{activeCount !== 1 ? 's' : ''} remaining
+              {completedCount > 0 && `, ${completedCount} completed`}
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
