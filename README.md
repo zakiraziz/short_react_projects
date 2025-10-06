@@ -1,4 +1,4 @@
-#Seven Then ⏳
+ #Seven Then ⏳
 A sleek and intuitive web-based application that helps you focus on the present by visualizing time in 7-minute intervals. Built with a modern tech stack for a smooth, responsive experience.
 
 https://via.placeholder.com/800x400/2D3748/FFFFFF?text=Seven+Then+App+Preview
