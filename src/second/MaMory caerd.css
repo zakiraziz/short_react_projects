@@ -1,35 +1,142 @@
 .App {
   max-width: 860px;
   margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  color: #fff;
+  margin-bottom: 20px;
+  font-size: 2.5em;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 button {
   background: none;
   border: 2px solid #fff;
-  padding: 6px 12px;
+  padding: 10px 20px;
   border-radius: 4px;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
   font-size: 1em;
   background: #1b1523;
+  transition: all 0.3s ease;
+  margin: 5px;
 }
 
 button:hover {
   background: #c23866;
   color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
+button:active {
+  transform: translateY(0);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+button:disabled:hover {
+  background: #1b1523;
+}
+
+/* Game Info Section */
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 0;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.stats {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+}
+
+.stat-label {
+  font-size: 0.9em;
+  color: #ccc;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stat-value {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-primary {
+  background: #c23866;
+  border-color: #c23866;
+}
+
+.btn-primary:hover {
+  background: #a52c55;
+  border-color: #a52c55;
+}
+
+.btn-secondary {
+  background: #2d3748;
+  border-color: #4a5568;
+}
+
+.btn-secondary:hover {
+  background: #4a5568;
+  border-color: #718096;
+}
+
+/* Card Grid */
 .card-grid {
   margin-top: 40px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
+  perspective: 1000px;
 }
 
 .card {
   position: relative;
   cursor: pointer;
+  height: 150px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.card:hover .back {
+  background: #2a2139;
+  border-color: #c23866;
 }
 
 .card img {
@@ -43,6 +150,20 @@ button:hover {
   transform: rotateY(90deg);
   transition: all ease-in 0.2s;
   position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 6px;
+}
+
+.card .front img {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
 }
 
 .flipped .front {
@@ -55,6 +176,15 @@ button:hover {
   transition-delay: 0.2s;
   height: 100%;
   background: #1b1523;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  font-size: 3em;
+  color: #c23866;
+  font-weight: bold;
 }
 
 .flipped .back {
@@ -65,4 +195,222 @@ button:hover {
 .matched {
   opacity: 0.5;
   cursor: default;
+}
+
+.matched .front {
+  border-color: #27ae60;
+  box-shadow: 0 0 15px #27ae60;
+}
+
+/* Win Message */
+.win-message {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  color: white;
+  padding: 30px;
+  border-radius: 15px;
+  margin: 30px 0;
+  animation: slideDown 0.5s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.win-message h2 {
+  margin: 0 0 15px 0;
+  font-size: 2.2em;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.win-message p {
+  margin: 10px 0;
+  font-size: 1.2em;
+}
+
+.new-record {
+  font-weight: bold;
+  font-size: 1.4em;
+  margin: 15px 0 0 0;
+  animation: pulse 2s infinite;
+  text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+/* Game Instructions */
+.game-instructions {
+  margin-top: 30px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #ccc;
+  font-style: italic;
+}
+
+/* Loading State */
+.card.loading {
+  animation: pulse 1.5s infinite;
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 60%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  80% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes flipIn {
+  0% {
+    transform: rotateY(90deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .App {
+    margin: 20px auto;
+    padding: 10px;
+  }
+  
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .card {
+    height: 120px;
+  }
+  
+  .game-info {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px;
+  }
+  
+  .stats {
+    gap: 20px;
+  }
+  
+  .stat-value {
+    font-size: 1.5em;
+  }
+  
+  h1 {
+    font-size: 2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+  }
+  
+  .card {
+    height: 100px;
+  }
+  
+  .card .back {
+    font-size: 2em;
+  }
+  
+  .stats {
+    gap: 15px;
+  }
+  
+  .stat {
+    min-width: 60px;
+  }
+  
+  .stat-label {
+    font-size: 0.8em;
+  }
+  
+  .stat-value {
+    font-size: 1.3em;
+  }
+  
+  button {
+    padding: 8px 16px;
+    font-size: 0.9em;
+  }
+  
+  h1 {
+    font-size: 1.8em;
+  }
+}
+
+/* Dark theme enhancements */
+body {
+  background: #1b1523;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Focus styles for accessibility */
+button:focus,
+.card:focus {
+  outline: 2px solid #c23866;
+  outline-offset: 2px;
+}
+
+/* High score highlight */
+.best-score {
+  color: #f1c40f;
+  text-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
+}
+
+/* Turn counter animation */
+.turn-update {
+  animation: bounce 0.3s ease;
+}
+
+/* Card match animation */
+.card.matched .front {
+  animation: pulse 0.5s ease;
+}
+
+/* Difficulty indicator */
+.difficulty-indicator {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: #c23866;
+  font-size: 0.8em;
+  margin-left: 10px;
+  vertical-align: middle;
 }
