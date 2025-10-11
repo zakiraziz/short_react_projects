@@ -215,3 +215,136 @@ export default function App() {
   if (isLoading) {
     return <LoadingSpinner />;
   }
+
+  return (
+    <AuthProvider value={{ user, login, logout, register }}>
+      <CartProvider value={{ 
+        cart, 
+        addToCart, 
+        removeFromCart, 
+        updateQuantity, 
+        clearCart,
+        cartTotal,
+        cartCount 
+      }}>
+        <WishlistProvider value={{
+          wishlist,
+          addToWishlist,
+          removeFromWishlist,
+          moveToCart,
+          wishlistCount
+        }}>
+          <Router>
+            <div className={`app ${isMenuOpen ? 'menu-open' : ''}`}>
+              <Navbar 
+                cartCount={cartCount}
+                wishlistCount={wishlistCount}
+                user={user}
+                setIsMenuOpen={setIsMenuOpen}
+                onLogout={logout}
+              />
+              
+              <main className="main-content">
+                <Routes>
+                  <Route 
+                    path="/" 
+                    element={
+                      <Home 
+                        addToCart={addToCart}
+                        addToWishlist={addToWishlist}
+                      />
+                    } 
+                  />
+                  <Route 
+                    path="/product/:id" 
+                    element={
+                      <ProductPage 
+                        addToCart={addToCart}
+                        addToWishlist={addToWishlist}
+                      />
+                    } 
+                  />
+                  <Route 
+                    path="/cart" 
+                    element={
+                      <Cart 
+                        cart={cart}
+                        removeFromCart={removeFromCart}
+                        updateQuantity={updateQuantity}
+                        clearCart={clearCart}
+                        cartTotal={cartTotal}
+                      />
+                    } 
+                  />
+                  <Route 
+                    path="/checkout" 
+                    element={
+                      <Checkout 
+                        cart={cart}
+                        cartTotal={cartTotal}
+                        user={user}
+                      />
+                    } 
+                  />
+                  <Route 
+                    path="/order-confirmation/:orderId" 
+                    element={<OrderConfirmation />} 
+                  />
+                  <Route 
+                    path="/wishlist" 
+                    element={
+                      <Wishlist 
+                        wishlist={wishlist}
+                        removeFromWishlist={removeFromWishlist}
+                        moveToCart={moveToCart}
+                      />
+                    } 
+                  />
+                  <Route 
+                    path="/search" 
+                    element={<SearchResults />} 
+                  />
+                  <Route 
+                    path="/category/:categoryId" 
+                    element={<CategoryPage />} 
+                  />
+                  <Route 
+                    path="/login" 
+                    element={<div>Login Page - TODO</div>} 
+                  />
+                  <Route 
+                    path="/register" 
+                    element={<div>Register Page - TODO</div>} 
+                  />
+                  <Route 
+                    path="*" 
+                    element={
+                      <div className="not-found">
+                        <h1>404 - Page Not Found</h1>
+                        <p>The page you're looking for doesn't exist.</p>
+                      </div>
+                    } 
+                  />
+                </Routes>
+              </main>
+
+              <Footer />
+              
+              {/* Toast Notifications */}
+              <div className="toast-container">
+                {toasts.map(toast => (
+                  <ToastNotification
+                    key={toast.id}
+                    message={toast.message}
+                    type={toast.type}
+                    onClose={() => removeToast(toast.id)}
+                  />
+                ))}
+              </div>
+            </div>
+          </Router>
+        </WishlistProvider>
+      </CartProvider>
+    </AuthProvider>
+  );
+}
