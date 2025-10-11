@@ -326,3 +326,131 @@ export default function Home({ addToCart, addToWishlist }) {
             <h2>Featured Products</h2>
             <p>Discover our most popular sneakers</p>
           </div>
+
+          <div className="products-controls">
+            <div className="controls-left">
+              <button 
+                className={`filter-toggle ${showFilters ? 'active' : ''}`}
+                onClick={() => setShowFilters(!showFilters)}
+              >
+                Filters {showFilters ? '✕' : '☰'}
+              </button>
+              <SearchBar 
+                value={searchQuery}
+                onChange={setSearchQuery}
+                placeholder="Search products..."
+              />
+            </div>
+            
+            <div className="controls-right">
+              <div className="results-count">
+                Showing {filteredProducts.length} of {products.length} products
+              </div>
+              
+              <select 
+                className="sort-select"
+                value={filters.sortBy}
+                onChange={(e) => setFilters(prev => ({ ...prev, sortBy: e.target.value }))}
+              >
+                <option value="featured">Featured</option>
+                <option value="newest">Newest</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="rating">Top Rated</option>
+                <option value="name">Name A-Z</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="products-layout">
+            <FilterSidebar 
+              filters={filters}
+              setFilters={setFilters}
+              isOpen={showFilters}
+              onClose={() => setShowFilters(false)}
+              stats={filterStats}
+              onClearFilters={handleClearFilters}
+            />
+            
+            <main className="products-main">
+              {isFilterLoading ? (
+                <ProductGridSkeleton count={8} />
+              ) : filteredProducts.length === 0 ? (
+                <div className="no-results">
+                  <div className="no-results-icon">🔍</div>
+                  <h3>No products found</h3>
+                  <p>Try adjusting your filters or search terms</p>
+                  <button 
+                    className="clear-filters-btn"
+                    onClick={handleClearFilters}
+                  >
+                    Clear All Filters
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <div className="product-grid">
+                    {paginatedProducts.map(product => (
+                      <ProductCard 
+                        key={product.id} 
+                        product={product} 
+                        addToCart={handleQuickAdd}
+                        addToWishlist={addToWishlist}
+                        showQuickAdd={true}
+                      />
+                    ))}
+                  </div>
+                  
+                  {totalPages > 1 && (
+                    <div className="pagination">
+                      <button 
+                        className="pagination-btn"
+                        disabled={currentPage === 1}
+                        onClick={() => setCurrentPage(prev => prev - 1)}
+                      >
+                        Previous
+                      </button>
+                      
+                      <div className="pagination-pages">
+                        {Array.from({ length: totalPages }, (_, i) => i + 1)
+                          .filter(page => 
+                            page === 1 || 
+                            page === totalPages || 
+                            (page >= currentPage - 1 && page <= currentPage + 1)
+                          )
+                          .map((page, index, array) => {
+                            const showEllipsis = index < array.length - 1 && array[index + 1] !== page + 1;
+                            return (
+                              <span key={page}>
+                                <button
+                                  className={`pagination-page ${currentPage === page ? 'active' : ''}`}
+                                  onClick={() => setCurrentPage(page)}
+                                >
+                                  {page}
+                                </button>
+                                {showEllipsis && <span className="pagination-ellipsis">...</span>}
+                              </span>
+                            );
+                          })}
+                      </div>
+                      
+                      <button 
+                        className="pagination-btn"
+                        disabled={currentPage === totalPages}
+                        onClick={() => setCurrentPage(prev => prev + 1)}
+                      >
+                        Next
+                      </button>
+                    </div>
+                  )}
+                </>
+              )}
+            </main>
+          </div>
+        </div>
+      </div>
+
+      <Newsletter />
+    </div>
+  );
+}
