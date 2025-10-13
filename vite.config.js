@@ -105,5 +105,105 @@ export default defineConfig(({ mode, command }) => {
 
     // Base public path when served in production
     base: env.VITE_BASE_URL || '/',
+   // Resolve configuration
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+        '@components': path.resolve(__dirname, './src/components'),
+        '@pages': path.resolve(__dirname, './src/pages'),
+        '@hooks': path.resolve(__dirname, './src/hooks'),
+        '@utils': path.resolve(__dirname, './src/utils'),
+        '@assets': path.resolve(__dirname, './src/assets'),
+        '@styles': path.resolve(__dirname, './src/styles'),
+      },
+      extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+    },
 
+    // CSS configuration
+    css: {
+      modules: {
+        localsConvention: 'camelCase',
+        generateScopedName: isProduction 
+          ? '[hash:base64:8]' 
+          : '[name]__[local]--[hash:base64:5]',
+      },
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@import "@styles/variables.scss";`,
+        },
+      },
+    },
+
+    // Build configuration
+    build: {
+      outDir: 'dist',
+      sourcemap: isProduction ? 'hidden' : true,
+      minify: isProduction ? 'esbuild' : false,
+      target: 'esnext',
+      
+      // Chunking strategy
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['react', 'react-dom'],
+            utils: ['lodash', 'axios'],
+          },
+          chunkFileNames: 'assets/js/[name]-[hash].js',
+          entryFileNames: 'assets/js/[name]-[hash].js',
+          assetFileNames: ({ name }) => {
+            if (/\.(gif|jpe?g|png|svg)$/.test(name ?? '')) {
+              return 'assets/images/[name]-[hash][extname]'
+            }
+            if (/\.css$/.test(name ?? '')) {
+              return 'assets/css/[name]-[hash][extname]'
+            }
+            return 'assets/[name]-[hash][extname]'
+          },
+        },
+      },
+    },
+
+    // Server configuration
+    server: {
+      port: 3000,
+      host: true, // Listen on all addresses
+      open: true, // Automatically open browser
+      cors: true,
+      
+      // Proxy configuration for API
+      proxy: {
+        '/api': {
+          target: env.VITE_API_URL || 'http://localhost:8080',
+          changeOrigin: true,
+          secure: false,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+      },
+    },
+
+    // Preview configuration (for previewing production build)
+    preview: {
+      port: 4173,
+      host: true,
+    },
+
+    // Environment variables
+    define: {
+      __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
+      __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
+    },
+
+    // Optimize dependencies
+    optimizeDeps: {
+      include: [
+        'react',
+        'react-dom',
+        'react-router-dom',
+      ],
+      exclude: [
+        // Add dependencies to exclude from pre-bundling
+      ],
+    },
+  }
+})
  
