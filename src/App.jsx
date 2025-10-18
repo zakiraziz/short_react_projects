@@ -135,5 +135,77 @@ function App() {
                     <Route path="/privacy" element={<PrivacyPolicyPage />} />
                     <Route path="/terms" element={<TermsOfServicePage />} />
                     
+                    {/* Protected Routes */}
+                    <Route 
+                      path="/dashboard" 
+                      element={
+                        <ProtectedRoute requireAuth>
+                          <DashboardPage />
+                        </ProtectedRoute>
+                      } 
+                    />
+                    
+                    <Route 
+                      path="/admin" 
+                      element={
+                        <ProtectedRoute requireAdmin>
+                          <AdminPage />
+                        </ProtectedRoute>
+                      } 
+                    />
+                    
+                    {/* Auth Routes */}
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                    
+                    {/* Error Routes */}
+                    <Route path="/unauthorized" element={<UnauthorizedPage />} />
+                    <Route path="/maintenance" element={<MaintenancePage />} />
+                    
+                    {/* Redirects */}
+                    <Route path="/home" element={<Navigate to="/" replace />} />
+                    
+                    {/* 404 Catch All */}
+                    <Route path="*" element={<NotFoundPage />} />
+                  </Routes>
+                </Suspense>
+              </AppLayout>
+              
+              {/* Global Components */}
+              <CookieConsent />
+              <NotificationContainer />
+              <ModalPortal />
+            </Router>
+          </LoadingProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
+  );
+}
 
+// Performance monitoring
+export const withPerformanceMonitoring = (Component) => {
+  return function PerformanceMonitoredComponent(props) {
+    useEffect(() => {
+      // Track component mount time
+      const startTime = performance.now();
+      
+      return () => {
+        const endTime = performance.now();
+        const loadTime = endTime - startTime;
+        
+        if (loadTime > 1000) {
+          console.warn(`Component ${Component.name} took ${loadTime}ms to load`);
+        }
+      };
+    }, []);
+    
+    return <Component {...props} />;
+  };
+};
+
+// Export app with performance monitoring in development
+export default process.env.NODE_ENV === 'development' 
+  ? withPerformanceMonitoring(App) 
   : App;
