@@ -1,13 +1,161 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
-</html>
+    <link rel="alternate icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="alternate icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.webmanifest" crossorigin="use-credentials">
+    
+    <!-- Primary Meta Tags -->
+    <title>Snake Game - Classic Arcade Experience</title>
+    <meta name="title" content="Snake Game - Classic Arcade Experience">
+    <meta name="description" content="A modern, responsive Snake game built with React. Enjoy the classic arcade experience with new features and smooth gameplay.">
+    <meta name="keywords" content="snake game, arcade, react, javascript, puzzle, classic game, retro">
+    <meta name="author" content="Your Name">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="en">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yoursnakegame.com/">
+    <meta property="og:title" content="Snake Game - Classic Arcade Experience">
+    <meta property="og:description" content="A modern, responsive Snake game built with React. Enjoy the classic arcade experience with new features and smooth gameplay.">
+    <meta property="og:image" content="/social-preview.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Snake Game">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yoursnakegame.com/">
+    <meta property="twitter:title" content="Snake Game - Classic Arcade Experience">
+    <meta property="twitter:description" content="A modern, responsive Snake game built with React. Enjoy the classic arcade experience with new features and smooth gameplay.">
+    <meta property="twitter:image" content="/social-preview.jpg">
+    <meta property="twitter:creator" content="@yourusername">
+    
+    <!-- PWA & Mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#10b981" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#065f46" media="(prefers-color-scheme: dark)">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Snake Game">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="msapplication-TileColor" content="#10b981">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data: blob: https:;
+      connect-src 'self' https://api.snakegame.com wss:;
+      media-src 'self';
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+      frame-ancestors 'none';
+    ">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <!-- Performance & Preloading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/src/main.jsx" as="script" fetchpriority="high">
+    <link rel="preload" href="/src/styles/global.css" as="style">
+    <link rel="preload" href="/src/assets/fonts/game-font.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- Preload above-the-fold images -->
+    <link rel="preload" href="/src/assets/images/snake-head.svg" as="image" type="image/svg+xml">
+    <link rel="preload" href="/src/assets/images/apple.svg" as="image" type="image/svg+xml">
+    
+    <!-- CSS with fallback -->
+    <link rel="stylesheet" href="/src/styles/global.css" media="all">
+    <link rel="stylesheet" href="/src/styles/dark.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="/src/styles/print.css" media="print">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yoursnakegame.com/">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoGame",
+      "name": "Snake Game",
+      "description": "A modern, responsive Snake game built with React",
+      "url": "https://yoursnakegame.com",
+      "applicationCategory": "Game",
+      "genre": "Arcade, Puzzle",
+      "operatingSystem": "Web Browser",
+      "author": {
+        "@type": "Person",
+        "name": "Your Name"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "screenshot": [
+        "https://yoursnakegame.com/screenshot1.jpg",
+        "https://yoursnakegame.com/screenshot2.jpg"
+      ]
+    }
+    </script>
+    
+    <!-- Performance Monitoring -->
+    <script>
+      // Performance monitoring
+      window.__PERFORMANCE_MONITORING__ = {
+        startTime: performance.now(),
+        version: '1.0.0',
+        build: '<%= buildTimestamp %>'
+      };
+    </script>
+    
+    <!-- Error Boundary Script -->
+    <script>
+      // Global error handler for better error tracking
+      window.addEventListener('error', function(e) {
+        console.error('Global error caught:', e.error);
+        // Send to analytics service
+        if (window.gtag) {
+          gtag('event', 'exception', {
+            description: e.error.message,
+            fatal: true
+          });
+        }
+      });
+      
+      // Handle unhandled promise rejections
+      window.addEventListener('unhandledrejection', function(e) {
+        console.error('Unhandled promise rejection:', e.reason);
+        e.preventDefault();
+      });
+    </script>
+    
+    <!-- Loading State Styles -->
+    <style>
+      /* Critical CSS for loading state */
+      #root {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+      
