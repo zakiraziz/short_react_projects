@@ -15,11 +15,71 @@
       "file": "react-dom_client.js",
       "fileHash": "ead5c2c4",
       "needsInterop": true
+    },
+    "react-dom": {
+      "src": "../../node_modules/react-dom/index.js",
+      "file": "react-dom.js",
+      "fileHash": "a1b2c3d4",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "e5f6g7h8",
+      "needsInterop": false
+    },
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "i9j0k1l2",
+      "needsInterop": true
+    },
+    "lodash": {
+      "src": "../../node_modules/lodash/lodash.js",
+      "file": "lodash.js",
+      "fileHash": "m3n4o5p6",
+      "needsInterop": true
     }
   },
   "chunks": {
     "chunk-Y455YYDO": {
       "file": "chunk-Y455YYDO.js"
+    },
+    "chunk-ABC123EF": {
+      "file": "chunk-ABC123EF.js"
+    },
+    "chunk-XYZ789GH": {
+      "file": "chunk-XYZ789GH.js"
+    },
+    "chunk-DEF456IJ": {
+      "file": "chunk-DEF456IJ.js"
     }
-  }
+  },
+  "assets": {
+    "src/main.jsx": {
+      "file": "assets/main-abc123.js",
+      "src": "src/main.jsx"
+    },
+    "src/App.jsx": {
+      "file": "assets/App-xyz789.js",
+      "src": "src/App.jsx"
+    },
+    "src/styles.css": {
+      "file": "assets/styles-def456.css",
+      "src": "src/styles.css"
+    },
+    "public/logo.svg": {
+      "file": "assets/logo-ghi789.svg",
+      "src": "public/logo.svg"
+    }
+  },
+  "entryPoints": {
+    "main": {
+      "file": "index.html",
+      "css": ["assets/main-abc123.css"],
+      "js": ["assets/main-abc123.js"]
+    }
+  },
+  "timestamp": 1698765432,
+  "buildId": "build-20231025-143022"
 }
