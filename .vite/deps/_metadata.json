@@ -1,85 +1,159 @@
 {
-  "hash": "5566029d",
-  "configHash": "82f6af93",
-  "lockfileHash": "8229832f",
-  "browserHash": "91cbe0b9",
-  "optimized": {
-    "react": {
-      "src": "../../node_modules/react/index.js",
-      "file": "react.js",
-      "fileHash": "cf518699",
-      "needsInterop": true
-    },
-    "react-dom/client": {
-      "src": "../../node_modules/react-dom/client.js",
-      "file": "react-dom_client.js",
-      "fileHash": "ead5c2c4",
-      "needsInterop": true
-    },
-    "react-dom": {
-      "src": "../../node_modules/react-dom/index.js",
-      "file": "react-dom.js",
-      "fileHash": "a1b2c3d4",
-      "needsInterop": true
-    },
-    "react-router-dom": {
-      "src": "../../node_modules/react-router-dom/dist/index.js",
-      "file": "react-router-dom.js",
-      "fileHash": "e5f6g7h8",
-      "needsInterop": false
-    },
-    "axios": {
-      "src": "../../node_modules/axios/index.js",
-      "file": "axios.js",
-      "fileHash": "i9j0k1l2",
-      "needsInterop": true
-    },
-    "lodash": {
-      "src": "../../node_modules/lodash/lodash.js",
-      "file": "lodash.js",
-      "fileHash": "m3n4o5p6",
-      "needsInterop": true
-    }
-  },
-  "chunks": {
-    "chunk-Y455YYDO": {
-      "file": "chunk-Y455YYDO.js"
-    },
-    "chunk-ABC123EF": {
-      "file": "chunk-ABC123EF.js"
-    },
-    "chunk-XYZ789GH": {
-      "file": "chunk-XYZ789GH.js"
-    },
-    "chunk-DEF456IJ": {
-      "file": "chunk-DEF456IJ.js"
-    }
-  },
-  "assets": {
-    "src/main.jsx": {
-      "file": "assets/main-abc123.js",
-      "src": "src/main.jsx"
-    },
-    "src/App.jsx": {
-      "file": "assets/App-xyz789.js",
-      "src": "src/App.jsx"
-    },
-    "src/styles.css": {
-      "file": "assets/styles-def456.css",
-      "src": "src/styles.css"
-    },
-    "public/logo.svg": {
-      "file": "assets/logo-ghi789.svg",
-      "src": "public/logo.svg"
-    }
-  },
-  "entryPoints": {
-    "main": {
-      "file": "index.html",
-      "css": ["assets/main-abc123.css"],
-      "js": ["assets/main-abc123.js"]
-    }
-  },
-  "timestamp": 1698765432,
-  "buildId": "build-20231025-143022"
+"hash": "5566029d",
+"configHash": "82f6af93",
+"lockfileHash": "8229832f",
+"browserHash": "91cbe0b9",
+"optimized": {
+"react": {
+"src": "../../node_modules/react/index.js",
+"file": "react.js",
+"fileHash": "cf518699",
+"needsInterop": true
+},
+"react-dom/client": {
+"src": "../../node_modules/react-dom/client.js",
+"file": "react-dom_client.js",
+"fileHash": "ead5c2c4",
+"needsInterop": true
+},
+"react-dom": {
+"src": "../../node_modules/react-dom/index.js",
+"file": "react-dom.js",
+"fileHash": "a1b2c3d4",
+"needsInterop": true
+},
+"react-router-dom": {
+"src": "../../node_modules/react-router-dom/dist/index.js",
+"file": "react-router-dom.js",
+"fileHash": "e5f6g7h8",
+"needsInterop": false
+},
+"axios": {
+"src": "../../node_modules/axios/index.js",
+"file": "axios.js",
+"fileHash": "i9j0k1l2",
+"needsInterop": true
+},
+"lodash": {
+"src": "../../node_modules/lodash/lodash.js",
+"file": "lodash.js",
+"fileHash": "m3n4o5p6",
+"needsInterop": true
+},
+"@reduxjs/toolkit": {
+"src": "../../node_modules/@reduxjs/toolkit/dist/index.js",
+"file": "redux-toolkit.js",
+"fileHash": "q7r8s9t0",
+"needsInterop": false
+},
+"react-redux": {
+"src": "../../node_modules/react-redux/dist/react-redux.js",
+"file": "react-redux.js",
+"fileHash": "u1v2w3x4",
+"needsInterop": false
+},
+"tailwindcss": {
+"src": "../../node_modules/tailwindcss/dist/tailwind.css",
+"file": "tailwind.css",
+"fileHash": "y5z6a7b8",
+"needsInterop": false
+}
+},
+"chunks": {
+"chunk-Y455YYDO": {
+"file": "chunk-Y455YYDO.js"
+},
+"chunk-ABC123EF": {
+"file": "chunk-ABC123EF.js"
+},
+"chunk-XYZ789GH": {
+"file": "chunk-XYZ789GH.js"
+},
+"chunk-DEF456IJ": {
+"file": "chunk-DEF456IJ.js"
+},
+"chunk-RTK987JK": {
+"file": "chunk-RTK987JK.js"
+},
+"chunk-UI456OPQ": {
+"file": "chunk-UI456OPQ.js"
+},
+"chunk-UTIL789ST": {
+"file": "chunk-UTIL789ST.js"
+}
+},
+"assets": {
+"src/main.jsx": {
+"file": "assets/main-abc123.js",
+"src": "src/main.jsx"
+},
+"src/App.jsx": {
+"file": "assets/App-xyz789.js",
+"src": "src/App.jsx"
+},
+"src/styles.css": {
+"file": "assets/styles-def456.css",
+"src": "src/styles.css"
+},
+"public/logo.svg": {
+"file": "assets/logo-ghi789.svg",
+"src": "public/logo.svg"
+},
+"src/components/Header.jsx": {
+"file": "assets/Header-123abc.js",
+"src": "src/components/Header.jsx"
+},
+"src/components/Footer.jsx": {
+"file": "assets/Footer-456def.js",
+"src": "src/components/Footer.jsx"
+},
+"src/store/store.js": {
+"file": "assets/store-789ghi.js",
+"src": "src/store/store.js"
+},
+"src/hooks/useAuth.js": {
+"file": "assets/useAuth-jkl012.js",
+"src": "src/hooks/useAuth.js"
+},
+"src/utils/helpers.js": {
+"file": "assets/helpers-mno345.js",
+"src": "src/utils/helpers.js"
+},
+"src/assets/images/hero-bg.jpg": {
+"file": "assets/hero-bg-pqr678.jpg",
+"src": "src/assets/images/hero-bg.jpg"
+},
+"src/assets/icons/search.svg": {
+"file": "assets/search-stu901.svg",
+"src": "src/assets/icons/search.svg"
+}
+},
+"entryPoints": {
+"main": {
+"file": "index.html",
+"css": ["assets/main-abc123.css", "assets/styles-def456.css"],
+"js": ["assets/main-abc123.js", "assets/App-xyz789.js"]
+},
+"admin": {
+"file": "admin.html",
+"css": ["assets/admin-456xyz.css"],
+"js": ["assets/admin-456xyz.js"]
+},
+"dashboard": {
+"file": "dashboard.html",
+"css": ["assets/dashboard-789uvw.css"],
+"js": ["assets/dashboard-789uvw.js"]
+}
+},
+"timestamp": 1698765432,
+"buildId": "build-20231025-143022",
+"environment": "production",
+"viteVersion": "4.4.9",
+"buildTime": 2450,
+"bundleSize": {
+"total": 1542876,
+"js": 1234501,
+"css": 156432,
+"assets": 151943
+}
 }
