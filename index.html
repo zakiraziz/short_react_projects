@@ -3,11 +3,196 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Snake Game">
+    
+    <!-- Primary Meta Tags -->
+    <title>Snake Game - Classic Arcade Experience</title>
+    <meta name="title" content="Snake Game - Classic Arcade Experience" />
+    <meta name="description" content="Play the classic Snake game with modern features. Control the snake, eat food, grow longer, and avoid collisions in this addictive arcade experience." />
+    <meta name="keywords" content="snake game, arcade, classic game, retro, puzzle, entertainment, react game" />
+    <meta name="author" content="Your Name" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://your-domain.com/" />
+    <meta property="og:title" content="Snake Game - Classic Arcade Experience" />
+    <meta property="og:description" content="Play the classic Snake game with modern features. Control the snake, eat food, grow longer, and avoid collisions in this addictive arcade experience." />
+    <meta property="og:image" content="/social-preview.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Snake Game" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://your-domain.com/" />
+    <meta property="twitter:title" content="Snake Game - Classic Arcade Experience" />
+    <meta property="twitter:description" content="Play the classic Snake game with modern features. Control the snake, eat food, grow longer, and avoid collisions in this addictive arcade experience." />
+    <meta property="twitter:image" content="/social-preview.png" />
+    
+    <!-- Additional Meta Tags -->
+    <meta name="application-name" content="Snake Game" />
+    <meta name="msapplication-TileColor" content="#000000" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="/src/main.jsx" as="script" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- CSS Variables for Theme -->
+    <style>
+      :root {
+        --primary-color: #00b894;
+        --secondary-color: #0984e3;
+        --background-color: #2d3436;
+        --text-color: #dfe6e9;
+        --accent-color: #e17055;
+      }
+      
+      /* Critical CSS for initial load */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        overflow-x: hidden;
+      }
+      
+      #root {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      /* Loading animation */
+      .loading-spinner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(255, 255, 255, 0.1);
+        border-left: 4px solid var(--primary-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoGame",
+      "name": "Snake Game",
+      "description": "Classic Snake arcade game with modern features",
+      "gamePlatform": "Web Browser",
+      "applicationCategory": "Game",
+      "genre": ["Arcade", "Puzzle", "Retro"],
+      "author": {
+        "@type": "Person",
+        "name": "Your Name"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <noscript>
+      <div style="text-align: center; padding: 2rem; background: #e74c3c; color: white;">
+        <h2>JavaScript Required</h2>
+        <p>This application requires JavaScript to function properly. Please enable JavaScript in your browser settings.</p>
+      </div>
+    </noscript>
+    
+    <!-- Loading fallback -->
+    <div id="loading-fallback" class="loading-spinner" style="display: none;">
+      <div class="spinner"></div>
+      <p>Loading Snake Game...</p>
+    </div>
+    
+    <div id="root">
+      <!-- React app will mount here -->
+    </div>
+    
     <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- Service Worker Registration for PWA -->
+    <script>
+      // Show loading fallback immediately
+      document.getElementById('loading-fallback').style.display = 'flex';
+      
+      // Register service worker for PWA
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+      
+      // Hide loading fallback when React app mounts
+      window.addEventListener('react-app-mounted', () => {
+        document.getElementById('loading-fallback').style.display = 'none';
+      });
+      
+      // Fallback: hide loading after 5 seconds
+      setTimeout(() => {
+        document.getElementById('loading-fallback').style.display = 'none';
+      }, 5000);
+      
+      // Theme detection
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    </script>
+    
+    <!-- Performance Monitoring -->
+    <script>
+      // Performance observer for Core Web Vitals
+      if ('PerformanceObserver' in window) {
+        const observer = new PerformanceObserver((list) => {
+          list.getEntries().forEach((entry) => {
+            console.log(`${entry.name}: ${entry.value}`);
+          });
+        });
+        
+        observer.observe({ entryTypes: ['paint', 'largest-contentful-paint', 'first-input'] });
+      }
+    </script>
   </body>
 </html>
