@@ -95,4 +95,110 @@ export function withRouter(Component) {
     });
   };
 }
+// Error boundary component
+export class ErrorBoundary extends require_react().Component {
+  constructor(props) {
+    super(props);
+    __publicField(this, "state", {
+      hasError: false,
+      error: null
+    });
+  }
+  
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+  
+  componentDidCatch(error, errorInfo) {
+    console.error('Error caught by boundary:', error, errorInfo);
+  }
+  
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback || jsx("div", {
+        className: "error-boundary",
+        children: [
+          jsx("h1", { children: "Something went wrong" }),
+          jsx("p", { children: this.state.error?.message }),
+          jsx("button", {
+            onClick: () => this.setState({ hasError: false, error: null }),
+            children: "Try again"
+          })
+        ]
+      });
+    }
+    
+    return this.props.children;
+  }
+}
 
+// Custom hooks
+export function useLocalStorage(key, initialValue) {
+  const [storedValue, setStoredValue] = useState(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      console.error(`Error reading localStorage key "${key}":`, error);
+      return initialValue;
+    }
+  });
+
+  const setValue = (value) => {
+    try {
+      const valueToStore = value instanceof Function ? value(storedValue) : value;
+      setStoredValue(valueToStore);
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+    } catch (error) {
+      console.error(`Error setting localStorage key "${key}":`, error);
+    }
+  };
+
+  return [storedValue, setValue];
+}
+
+export function useFetch(url, options = {}) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = __async(void 0, null, function* () {
+      try {
+        setLoading(true);
+        setError(null);
+        const response = yield axios.get(url, options);
+        setData(response.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    });
+
+    fetchData();
+  }, [url]);
+
+  return { data, loading, error };
+}
+
+// Performance optimization utilities
+export function memo(Component, propsAreEqual) {
+  return require_react().memo(Component, propsAreEqual);
+}
+
+export function useMemoizedCallback(callback, deps) {
+  return useCallback(callback, deps || []);
+}
+
+// Development helpers
+if (process.env.NODE_ENV === 'development') {
+  console.log('React bundle loaded in development mode');
+  
+  // Hot Module Replacement support
+  if (import.meta.hot) {
+    import.meta.hot.accept(() => {
+      console.log('Hot reload triggered');
+    });
+  }
+}
