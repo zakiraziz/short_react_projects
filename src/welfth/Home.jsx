@@ -292,3 +292,267 @@ export default function Home({ addToCart }) {
     setCurrentPage(1); // Reset to first page when filters change
   }, [filters, products, searchQuery]);
 
+  // Pagination
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Featured products (first 4 products)
+  const featuredProducts = products.slice(0, 4);
+
+  // New arrivals (products from last 30 days)
+  const newArrivals = products.filter(product => {
+    const releaseDate = new Date(product.releaseDate);
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+    return releaseDate > thirtyDaysAgo;
+  });
+
+  const handleQuickView = (product) => {
+    // Implement quick view modal
+    console.log('Quick view:', product);
+  };
+
+  const handleAddToWishlist = (product) => {
+    // This would be handled by the WishlistContext
+    console.log('Add to wishlist:', product);
+  };
+
+  if (isLoading) {
+    return (
+      <div className="home-page">
+        <HeroBanner />
+        <ProductGridSkeleton count={8} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="home-page">
+      {/* Hero Banner */}
+      <HeroBanner />
+      
+      {/* Featured Categories */}
+      <section className="categories-section">
+        <div className="container">
+          <h2 className="section-title">Shop by Category</h2>
+          <CategoryGrid categories={categories} />
+        </div>
+      </section>
+
+      {/* Featured Products */}
+      <section className="featured-section">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">Featured Products</h2>
+            <p className="section-subtitle">Discover our most popular picks</p>
+          </div>
+          <div className="product-grid featured-grid">
+            {featuredProducts.map(product => (
+              <ProductCard 
+                key={product.id} 
+                product={product} 
+                addToCart={addToCart}
+                onQuickView={handleQuickView}
+                onAddToWishlist={handleAddToWishlist}
+                isInCart={cart.some(item => item.id === product.id)}
+                isInWishlist={wishlist.some(item => item.id === product.id)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* New Arrivals */}
+      <section className="new-arrivals-section">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">New Arrivals</h2>
+            <p className="section-subtitle">Fresh styles just dropped</p>
+          </div>
+          <div className="product-grid">
+            {newArrivals.map(product => (
+              <ProductCard 
+                key={product.id} 
+                product={product} 
+                addToCart={addToCart}
+                onQuickView={handleQuickView}
+                onAddToWishlist={handleAddToWishlist}
+                isInCart={cart.some(item => item.id === product.id)}
+                isInWishlist={wishlist.some(item => item.id === product.id)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* All Products Section */}
+      <section className="all-products-section">
+        <div className="container">
+          <div className="section-header">
+            <div className="header-left">
+              <h2 className="section-title">All Products</h2>
+              <p className="results-count">
+                Showing {currentProducts.length} of {filteredProducts.length} products
+              </p>
+            </div>
+            
+            <div className="header-right">
+              {/* Search Bar */}
+              <SearchBar 
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                placeholder="Search products..."
+              />
+              
+              {/* View Mode Toggle */}
+              <div className="view-mode-toggle">
+                <button 
+                  className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`}
+                  onClick={() => setViewMode('grid')}
+                  aria-label="Grid view"
+                >
+                  ▣
+                </button>
+                <button 
+                  className={`view-btn ${viewMode === 'list' ? 'active' : ''}`}
+                  onClick={() => setViewMode('list')}
+                  aria-label="List view"
+                >
+                  ≡
+                </button>
+              </div>
+
+              {/* Mobile Filter Toggle */}
+              <button 
+                className="filter-toggle mobile-only"
+                onClick={() => setShowFilters(!showFilters)}
+              >
+                Filters
+              </button>
+            </div>
+          </div>
+
+          <div className="products-content">
+            {/* Filter Sidebar */}
+            <div className={`filter-sidebar-wrapper ${showFilters ? 'show' : ''}`}>
+              <FilterSidebar 
+                filters={filters} 
+                setFilters={setFilters}
+                onClose={() => setShowFilters(false)}
+              />
+            </div>
+            
+            {/* Products Grid/List */}
+            <main className="products-main">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`${viewMode}-${currentPage}`}
+                  className={`product-container ${viewMode}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {currentProducts.length > 0 ? (
+                    currentProducts.map(product => (
+                      <ProductCard 
+                        key={product.id} 
+                        product={product} 
+                        addToCart={addToCart}
+                        onQuickView={handleQuickView}
+                        onAddToWishlist={handleAddToWishlist}
+                        isInCart={cart.some(item => item.id === product.id)}
+                        isInWishlist={wishlist.some(item => item.id === product.id)}
+                        viewMode={viewMode}
+                      />
+                    ))
+                  ) : (
+                    <div className="no-products">
+                      <h3>No products found</h3>
+                      <p>Try adjusting your filters or search terms</p>
+                      <button 
+                        className="clear-filters-btn"
+                        onClick={() => {
+                          setFilters({
+                            category: 'all',
+                            priceRange: [0, 1000],
+                            sortBy: 'featured',
+                            brands: [],
+                            sizes: [],
+                            colors: [],
+                            rating: 0,
+                            inStock: false,
+                            onSale: false
+                          });
+                          setSearchQuery('');
+                        }}
+                      >
+                        Clear All Filters
+                      </button>
+                    </div>
+                  )}
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="pagination">
+                  <button 
+                    className="pagination-btn"
+                    disabled={currentPage === 1}
+                    onClick={() => paginate(currentPage - 1)}
+                  >
+                    Previous
+                  </button>
+                  
+                  {[...Array(totalPages)].map((_, index) => (
+                    <button
+                      key={index + 1}
+                      className={`pagination-btn ${currentPage === index + 1 ? 'active' : ''}`}
+                      onClick={() => paginate(index + 1)}
+                    >
+                      {index + 1}
+                    </button>
+                  ))}
+                  
+                  <button 
+                    className="pagination-btn"
+                    disabled={currentPage === totalPages}
+                    onClick={() => paginate(currentPage + 1)}
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+            </main>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <Newsletter />
+
+      {/* Special Offers Banner */}
+      <section className="offers-banner">
+        <div className="container">
+          <div className="offer-card">
+            <h3>Free Shipping</h3>
+            <p>On all orders over $100</p>
+          </div>
+          <div className="offer-card">
+            <h3>30-Day Returns</h3>
+            <p>Hassle-free returns</p>
+          </div>
+          <div className="offer-card">
+            <h3>Secure Payment</h3>
+            <p>100% secure payment processing</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
