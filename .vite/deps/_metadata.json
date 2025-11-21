@@ -3,6 +3,7 @@
   "configHash": "82f6af93",
   "lockfileHash": "8229832f",
   "browserHash": "91cbe0b9",
+
   "optimized": {
     "react": {
       "src": "../../node_modules/react/index.js",
@@ -15,11 +16,50 @@
       "file": "react-dom_client.js",
       "fileHash": "ead5c2c4",
       "needsInterop": true
+    },
+
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "5ac6bf09",
+      "needsInterop": true
+    },
+
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "b8e45c3d",
+      "needsInterop": false
+    },
+
+    "lodash": {
+      "src": "../../node_modules/lodash/lodash.js",
+      "file": "lodash.js",
+      "fileHash": "cd22be52",
+      "needsInterop": false
     }
   },
+
   "chunks": {
     "chunk-Y455YYDO": {
       "file": "chunk-Y455YYDO.js"
+    },
+
+    "chunk-UI1234AB": {
+      "file": "chunk-UI1234AB.js",
+      "imports": ["react", "react-dom/client"]
+    },
+
+    "chunk-DATA998X": {
+      "file": "chunk-DATA998X.js",
+      "imports": ["axios"]
     }
+  },
+
+  "metadata": {
+    "buildTime": "2025-11-21T19:45:00Z",
+    "env": "development",
+    "tool": "Vite",
+    "version": "5.2.1"
   }
 }
