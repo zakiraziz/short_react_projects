@@ -114,4 +114,91 @@
   border-radius: 50%;
   pointer-events: none;
 }
+/* Game Over Screen */
+.game-over-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
 
+.game-over-content {
+  text-align: center;
+  color: white;
+  font-family: 'Courier New', monospace;
+}
+
+.game-over-title {
+  font-size: 48px;
+  color: #ff4444;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px #ff4444;
+}
+
+.final-score, .final-level {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #00ffff;
+}
+
+.restart-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #00ff00;
+  border: none;
+  border-radius: 5px;
+  color: #000;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.restart-button:hover {
+  background: #00cc00;
+  transform: scale(1.1);
+}
+
+/* Level Start Animation */
+.level-start {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  color: #00ffff;
+  font-family: 'Courier New', monospace;
+  animation: fadeInOut 2s ease-in-out;
+  z-index: 50;
+}
+
+/* Animations */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes explode {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
