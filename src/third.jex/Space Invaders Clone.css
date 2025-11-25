@@ -1,43 +1,120 @@
 .game-container {
-  width: 600px;
-  height: 600px;
+  width: 800px;
+  height: 700px;
   margin: 0 auto;
   position: relative;
-  background: #000;
+  background: linear-gradient(to bottom, #0a0a2a, #1a1a4a);
   overflow: hidden;
   outline: none;
+  border: 3px solid #00ffff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
 }
 
+/* Player with spaceship design */
 .player {
-  width: 30px;
-  height: 20px;
-  background: #0f0;
+  width: 40px;
+  height: 40px;
+  background: #00ff00;
   position: absolute;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  transition: transform 0.1s ease;
+  box-shadow: 0 0 10px #00ff00;
 }
 
+.player.invulnerable {
+  animation: blink 0.5s infinite;
+}
+
+.player .health-bar {
+  position: absolute;
+  top: -15px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.player .health-fill {
+  height: 100%;
+  background: linear-gradient(to right, #ff4444, #ffaa00, #00ff00);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+/* Invaders with different types */
 .invader {
-  width: 30px;
-  height: 20px;
-  background: #f00;
+  width: 35px;
+  height: 35px;
   position: absolute;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 8px currentColor;
 }
 
-.bullet {
-  width: 4px;
-  height: 10px;
-  background: #ff0;
-  position: absolute;
+.invader-type-1 {
+  background: #ff4444;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 }
 
-.game-info {
+.invader-type-2 {
+  background: #ffaa00;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.invader-type-3 {
+  background: #8844ff;
+  clip-path: circle(50% at 50% 50%);
+}
+
+.invader.damaged {
+  animation: flash 0.1s ease-in-out 3;
+  filter: brightness(1.5);
+}
+
+.invader-health {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
   color: white;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px black;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 20px;
+  text-align: center;
 }
 
-.start-button, .restart-button {
-  padding: 10px 20px;
-  font-size: 18px;
-  cursor: pointer;
+/* Bullets with different types */
+.bullet {
+  width: 6px;
+  height: 15px;
+  position: absolute;
+  border-radius: 3px;
+  transition: transform 0.1s ease;
 }
+
+.bullet.normal {
+  background: linear-gradient(to top, #ffff00, #ffaa00);
+  box-shadow: 0 0 8px #ffff00;
+}
+
+.bullet.power {
+  background: linear-gradient(to top, #ff4444, #ff0066);
+  box-shadow: 0 0 12px #ff4444;
+  width: 8px;
+  height: 20px;
+}
+
+.bullet.laser {
+  background: linear-gradient(to top, #00ffff, #0088ff);
+  box-shadow: 0 0 15px #00ffff;
+  width: 3px;
+  height: 25px;
+}
+
