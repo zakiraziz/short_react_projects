@@ -7,18 +7,102 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependency directories
 node_modules
+jspm_packages
+bower_components
+vendor/
+
+# Production builds
 dist
 dist-ssr
-*.local
+build
+out
+output
+.next
+.nuxt
+.cache/
 
-# Editor directories and files
+# Environment files
+*.local
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# Environment variables (sensitive)
+.env.secrets
+.env.keys
+*.pem
+*.key
+*.crt
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Testing
+coverage
+.nyc_output
+reports/
+test-results/
+jest-junit/
+*.test.js.snap
+*.spec.js.snap
+
+# IDE - Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json.example
 .idea
+*.swp
+*.swo
+*~
 .DS_Store
+Thumbs.db
+desktop.ini
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
+.vs/
+
+# Package manager specific
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+npm-shrinkwrap.json
+
+# TypeScript
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Python (if applicable)
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+venv/
+env/
+ENV/
+
+# Ruby (if applicable)
+*.gem
+.bundle/
+Gemfile.lock
+
+# Java (if applicable)
+*.class
+*.jar
+*.war
+*.ear
+target/
+.gradle/
+build/
+
